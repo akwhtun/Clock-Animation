@@ -1,0 +1,524 @@
+        *,*::before,*::after{
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin:0;
+            background-color: #e3e3e3;
+            position: relative;
+
+        }
+
+        body::after{
+            content: 'Clock Animation';
+            position: absolute;
+            top:7%;
+            left:50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight:bold;
+            text-transform: uppercase;
+            letter-spacing:2px;
+            line-height: 1.5em;
+            width: max-content;
+
+        }
+
+        body.one::after{
+            color: transparent;
+            -webkit-background-clip: text;
+            background-image:url(clock-bg-img/1.jpg);
+            background-position: right bottom;
+        }
+
+        body.two::after{
+            color: transparent;
+            -webkit-background-clip: text;
+            background-image:url(clock-bg-img/2.jpg);
+            background-position: left bottom;
+
+        }
+
+        body.three::after{
+            color: transparent;
+            -webkit-background-clip: text;
+            background-image:url(clock-bg-img/3.jpg);
+            background-position:center;
+        }
+
+        body.four::after {
+            color: transparent;
+            -webkit-background-clip: text;
+            background-image:url(clock-bg-img/4.jpg);
+            background-position:top right;
+        }
+
+        body.five::after{
+            color: transparent;
+            -webkit-background-clip: text;
+            background-image:url(clock-bg-img/5.jpg);
+            background-position:top left;
+        }
+
+        /*clock-face */
+        .clock-container{
+            --translate-x-y :0%, -50%;
+            --cover-border:rgb(4, 121, 238);
+            --in-out-border:#1f1d1d;
+            --shadow-color:#3b4141;
+            --center-color:#010a86;
+            --second-color:rgb(7, 1, 61);
+            --bg-photo:none;
+            --text-photo: url(./clock-bg-img/1.jpg);
+            --radius:50%;
+            --border-size:2px;
+            --width:320px;
+            --height:320px;
+
+
+            width:var(--width);
+            height:var(--height);
+            background-image: var(--bg-photo);
+            background-position:center;
+            background-size: cover;
+            border:var(--border-size) solid var(--in-out-border);
+            border-radius:var(--radius);
+            position:relative;
+            box-shadow: 3px 3px 5px var(--shadow-color),-3px -3px 5px var(--shadow-color);
+        }
+        .clock-container::before{
+            content:'';
+            position: absolute;
+            border:10px solid var(--in-out-border);
+            top:10px;
+            left:10px;
+            right:10px;
+            bottom:10px;
+            border-radius: 50%;
+        }
+        .clock-container::after{
+            content:'';
+            position: absolute;
+            border:7px solid var(--cover-border);
+            top:3px;
+            left:3px;
+            right:3px;
+            bottom:3px;
+            border-radius: 50%;
+        }
+
+        /* clock-numbers */
+        .clock-nums{
+            position: absolute;
+            font-size:1.5rem;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight:600;
+            color:var(--center-color);
+        }
+        .num1{
+            right:27%;
+            top:13.5%;
+        }
+        .num2{
+            right:13.5%;
+            top:27%;
+           }
+        .num3{
+            right:7%;
+            top:50%;
+            transform:translateY(-50%);
+        }
+        .num4{
+            right:13%;
+            top:65%;
+        }
+        .num5{
+            right:27%;
+            top:80%;
+        }
+        .num6{
+            bottom:7%;
+            left:50%;
+            transform: translateX(-50%);
+        }
+        .num7{
+            left:27%;
+            top:80%;
+       
+        }
+        .num8{
+            left:13%;
+            top:65%;
+        }
+        .num9{
+            top:50%;
+            left:7%;
+            transform:translateY(-50%);
+        }
+        .num10{
+            left:13.5%;
+            top:27%;
+        }
+        .num11{
+            top:13.5%;
+            left:27%;
+        }
+        .num12{
+            left:50%;
+            top:7%;
+            transform:translateX(-50%);
+        }
+
+        /* clock-hands */
+        .hands{
+            position: absolute;
+            width: 10px;
+            height:10px;
+            border-radius: 50%;
+            background: var(--center-color);
+            top:50%;
+            left:50%;
+            transform:translate(-50%, -50%);
+            z-index:1;
+        }
+        .second{
+            position: absolute;
+            left:50%;
+            top:50%;
+            transform:translate(var(--translate-x-y));
+            border-radius: 5px;
+            width:110px;
+            height: 5px;
+            background:var(--second-color);
+            /* animation: long 10s infinite; */
+            transform-origin: left;
+        }
+        .second::before{
+            content: '';
+            width:30px;
+            height:6.5px;
+            position: absolute;
+            background:var(--second-color);
+            right:100%;
+            top:50%;
+            transform: translateY(-50%);
+            border-radius: 30px 0 0 30px;
+        }
+        .minute{
+            position: absolute;
+            width:80px;
+            height:7px;
+            border-radius: 50%;
+            background: var(--center-color);
+            left:50%;
+            top:50%;
+            transform:translate(var(--translate-x-y));
+            transform-origin: left;
+            animation: middle 20s infinite;
+        }
+        .hour{
+            position: absolute;
+            width:60px;
+            height:8px;
+            border-radius:50%;
+            background: var(--center-color);
+            left:50%;
+            top:50%;
+            transform: translate(var(--translate-x-y));
+            animation: short 30s infinite;
+            transform-origin: left;
+        }
+
+
+        /* button */
+        .button{
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .btn{
+            padding:1rem 1rem;
+            margin:2.2rem 1rem;
+            font-size: 1rem;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight:200;
+            cursor: pointer;
+            border-radius:.25rem;
+            border:none;
+            background: cornsilk;
+            position: relative;
+        }
+        .btn-shape::before{
+            content:'';
+            position: absolute;
+            z-index: -1;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition:transform 350ms ease-in;
+        }
+        .btn-shape{
+            z-index: 1;
+            transition:color 35oms ease-in;
+        }
+        .btn-shape:hover::before,
+        .btn-shape:active::before{
+            background-color: dodgerblue;
+            transform: scaleX(1);
+
+        }
+        .btn-shape:hover{
+            color:snow;
+        }
+        .btn-another::before{
+            content:'';
+            position: absolute;
+            z-index: -1;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition:transform 350ms ease-in;
+        }
+        .btn-another{
+            z-index: 1;
+            transition:color 350ms ease-in;
+        }
+        .btn-another:hover::before,
+        .btn-another:active:before{
+            background-color: dodgerblue;
+            transform: scaleX(1);
+
+        }
+        .btn-another:hover{
+            color:snow;
+        }
+
+        .btn-start::before,.btn-stop::before{
+            content: '';
+            position: absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            border-radius: 50%;
+            transform:scale(1.5);
+             z-index: -1;
+            transition: transform 500ms ease-in;
+            background-color:snow;
+        }
+        .btn-start,.btn-stop{
+            z-index: 1;
+            overflow: hidden;
+            background-color: dodgerblue;
+            transition: color 500ms ease-in;
+        }
+        .btn-start:hover::before,
+        .btn-start:focus::before,
+        .btn-stop:hover::before,
+        .btn-stop:focus::before{
+            transform:scale(0);
+        }
+        .btn-start:hover,.btn-stop:hover{
+            color:snow;
+        }
+
+        .btn-shape:active, .btn-another:active{
+            color:black;
+        }
+
+        /* play pause */
+        .btn-play,.btn-pause{
+            width: 1.5rem;
+            height: 1.5rem;
+            position: absolute;
+            top:50%;
+            right: 10%;
+            transform: translateY(-50%);
+        }
+
+        .btn.active{
+            display: none;
+        }
+
+        /*shape */
+        .clock-container.shape-one{
+            animation: one .7s ease-in-out forwards;
+        }
+        .clock-container.shape-two{
+            animation: two 1.5s cubic-bezier(0.47, 0, 0.745, 0.715) forwards;
+        } 
+         .clock-container.shape-three{
+            animation: three .7s ease-in forwards;
+           
+        }
+        .clock-container.shape-four{
+            --radius:30px;
+            --border-size:10px;
+            animation: four 1.5s ease-in-out forwards;
+       }
+
+       @keyframes one {
+         0%{
+               transform: rotate(0);
+           }
+
+           50%{
+            --radius:0px;
+            --border-size:0px;
+           }
+           
+           100%{
+               transform: rotate(360deg);
+               --radius:0px;
+               --border-size:0px;
+           }
+       }
+
+       @keyframes two {
+           0%{
+               transform: translateX(-50%);
+               --radius:0;
+               --border-size:0px;
+           }
+
+           25%{
+               transform: translateX(-150%);
+               --radius:0;
+               --border-size:0px;
+           }
+
+           50%{
+               transform: translate(0, -150%);
+               --radius:0;
+               --border-size:0px;
+           }
+
+           65%{
+               transform:translate(150%, 0);
+               --radius:0;
+               --border-size:0px;
+           }
+           75%{
+               transform: translate(80%, 0);
+               --radius:0;
+               --border-size:0px;
+           }
+            85%{
+                transform:translate(50%, -30%);
+                --radius:50% 50% 0 0;
+                --cover-border:rgb(7, 84, 161);
+                --border-size:0px;
+            }
+           100%{
+               transform: translate(0,0);
+               --radius:50% 50% 0 0;
+               --cover-border:rgb(7, 84, 161);
+               --border-size:0px;
+           }
+       }
+
+       @keyframes three {
+           0%{
+               transform: rotateX(0) rotateY(360deg);
+           }
+
+           50%{
+            --radius:10px;
+            --border-size:10px;
+            transform: skew(-34deg, 12deg);
+           }
+
+           100%{
+                --radius:10px;
+                --border-size:10px;
+                border-right: none;
+               transform: skew(-34deg, 12deg) rotateX(360deg) rotateY(0);
+           }
+        }
+
+        @keyframes  four {
+            0%{
+                transform: rotateY(0);
+            }
+            20%{
+                transform: rotateY(360deg)  rotateX(360deg);
+            }
+
+            50%{
+
+                transform: rotateX(0) scale(0.5);
+            }
+            80%{
+                transform: scale(1.5);
+            }
+            100%{
+                transform: scale(1);
+            }
+
+        }
+
+       /*background*/
+         .ano-one{
+            --cover-border:#353030;
+            --in-out-border:#eef1f5;
+            --shadow-color:#1d1d1d;
+            --center-color:rgb(0, 0, 0);
+            --second-color:rgb(212, 211, 255);
+            --bg-photo:url(./clock-bg-img/taylor-swift-glamour.jpg);
+         }
+         .ano-two{
+            --cover-border:rgb(82, 79, 78);
+            --in-out-border:rgb(58, 52, 50);
+            --shadow-color:rgb(112, 112, 112);
+            --center-color:rgba(170, 147, 140, 0.925);
+            --second-color:rgb(44, 41, 41);
+            --bg-photo:url(./clock-bg-img/harry.jpg);
+         }
+          .ano-three{
+            --cover-border:#000;
+            --in-out-border:lightgray;
+            --shadow-color:linen;
+            --center-color:snow;
+            --second-color:whitesmoke;
+            --bg-photo:url(./clock-bg-img/original\(0\).jpg);
+            background-position: right;
+         }
+         .ano-four{
+            --cover-border:#3d150b;
+            --in-out-border:#0055b6;
+            --shadow-color:#0e4455;
+            --center-color:rgb(236, 57, 2);
+            --second-color:rgb(3, 0, 182);
+            --bg-photo:url(./clock-bg-img/ondD.jpg);
+         }
+         .ano-five{
+        --cover-border:#f50197;
+        --in-out-border:#cccccc;
+        --shadow-color:#ad005f;
+        --center-color:snow;
+        --second-color:rgb(199, 1, 149);
+        --bg-photo:url(./clock-bg-img/lover.jpg);
+         }
+         .ano-six{
+            --cover-border:rgb(30, 54, 78);
+            --in-out-border:crimson;
+            --shadow-color:#ffcdd8;
+            --center-color:rgb(0, 0, 0);
+            --second-color:rgb(7, 7, 7);
+            --bg-photo:none;
+            font-weight: lighter;
+            font-family: Arial, Helvetica, sans-serif;
+            text-shadow: 2px 2px 2px rgb(104, 104, 104),-2px -2px 2px rgb(104, 104, 104);
+         }
